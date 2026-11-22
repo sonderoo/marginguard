@@ -249,4 +249,535 @@
       margin-bottom: 4px;
     }
     .demo-field input {
-      width: 10
+      width: 100%;
+      padding: 7px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border-strong);
+      background: var(--input-bg);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      outline: none;
+    }
+    .demo-field input:focus { border-color: #9ca3af; }
+
+    .demo-result {
+      background: #0f1115;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--red);
+      border-radius: 8px;
+      padding: 13px;
+      transition: border-left-color 0.2s ease;
+    }
+    .demo-result.safe { border-left-color: var(--green); }
+    .demo-item-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .demo-meta { font-size: 12px; color: var(--muted); }
+    .demo-profit { font-size: 14px; margin-top: 5px; }
+    .demo-profit strong.neg { color: #f87171; }
+    .demo-profit strong.pos { color: #4ade80; }
+    .demo-fix {
+      margin-top: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      background: var(--amber-bg);
+      border: 1px solid var(--amber-border);
+      color: #fde68a;
+    }
+    .demo-fix.safe {
+      background: var(--green-bg);
+      border-color: var(--green-border);
+      color: #bbf7d0;
+    }
+
+    /* Sections */
+    .section {
+      padding: 72px 0;
+      border-top: 1px solid var(--border);
+    }
+    .section-head {
+      margin-bottom: 36px;
+    }
+    .section-head.centered {
+      text-align: center;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: clamp(24px, 3vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    /* 3-Step How It Works */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+    }
+    .step-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px;
+    }
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      background: #1f222a;
+      border: 1px solid var(--border-strong);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .step-card h3 { font-size: 15.5px; margin-bottom: 6px; }
+    .step-card p { font-size: 13.5px; color: var(--muted); }
+
+    /* Features Grid */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-strong);
+      background: var(--surface-hover);
+    }
+    .card h3 {
+      font-size: 15.5px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .card p {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* Centered 2-Option Pricing */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      max-width: 740px;
+      margin: 0 auto;
+    }
+    @media (max-width: 700px) {
+      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
+    }
+    .price-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .price-card:hover { transform: translateY(-2px); }
+    .price-card.pro {
+      border-color: var(--border-strong);
+      border-top: 3px solid var(--green);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+    }
+    .popular-tag {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+      color: #4ade80;
+    }
+    .price-card h3 { font-size: 17px; font-weight: 600; }
+    .price-tag { font-size: 36px; font-weight: 700; margin: 10px 0 4px; }
+    .price-tag span { font-size: 14px; font-weight: 500; color: var(--muted); }
+    .price-desc { font-size: 13px; color: var(--muted); }
+    .price-card ul { list-style: none; margin: 22px 0 28px; flex: 1; }
+    .price-card li {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      padding-left: 20px;
+      position: relative;
+    }
+    .price-card li::before {
+      content: "✓";
+      color: var(--green);
+      font-weight: 700;
+      position: absolute;
+      left: 0;
+    }
+
+    /* FAQ */
+    .faq-list {
+      max-width: 740px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 18px;
+    }
+    summary {
+      font-weight: 600;
+      font-size: 14.5px;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    summary::after { content: "+"; color: var(--muted); font-size: 18px; font-weight: 400; }
+    details[open] summary::after { content: "−"; }
+    details p {
+      margin-top: 10px;
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Privacy */
+    .privacy {
+      max-width: 740px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .privacy h3 { color: var(--text); margin-bottom: 8px; font-size: 15.5px; }
+    .privacy code { color: var(--text-secondary); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; }
+
+    footer {
+      padding: 36px 0;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer a { color: var(--text-secondary); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    /* Subtle Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-wrap">
+    <div class="container">
+      <nav>
+        <a href="#" class="logo">
+          <img
+            src="./logo128.png?v=2"
+            alt="MarginGuard Logo"
+            class="logo-img"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';"
+          />
+          <span class="logo-fallback" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </span>
+          <span>MarginGuard</span>
+        </a>
+        <div class="nav-links">
+          <a href="#how-it-works">How It Works</a>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
+          <a href="https://buy.polar.sh/polar_cl_zckNHhazKGSxABLypHq6oi6kBUcdmsvWOhDqB0nEisI" target="_blank" rel="noopener noreferrer" class="nav-cta">Get Pro</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="hero">
+      <div>
+        <div class="tag"><span class="tag-dot"></span> Chrome Extension for eBay Sellers</div>
+        <h1>See Your Real eBay Profit Before Fees Eat It</h1>
+        <p class="hero-sub">
+          MarginGuard audits your live eBay Seller Hub active listings and drafts in one click. It calculates every eBay fee, flags low-profit items, and tells you the exact price to charge.
+        </p>
+        <div class="cta-group">
+          <a href="#pricing" class="btn btn-primary">Get MarginGuard Pro — $19/mo</a>
+          <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+        </div>
+        <div class="trust-strip">
+          <span>Works on Active Listings & Drafts</span>
+          <span>100% Local & Private</span>
+          <span>Cancel Anytime</span>
+        </div>
+      </div>
+
+      <!-- Interactive Live Calculator -->
+      <div class="demo-shell">
+        <div class="demo-header">
+          <strong>Try a Live Calculation</strong>
+          <span class="demo-badge">Interactive Preview</span>
+        </div>
+        <div class="demo-inputs">
+          <div class="demo-field">
+            <label for="simPrice">Listed Price ($)</label>
+            <input type="number" id="simPrice" value="35.00" step="1" />
+          </div>
+          <div class="demo-field">
+            <label for="simCost">Item + Ship ($)</label>
+            <input type="number" id="simCost" value="24.50" step="0.5" />
+          </div>
+          <div class="demo-field">
+            <label for="simAd">Ad Rate (%)</label>
+            <input type="number" id="simAd" value="10" step="1" />
+          </div>
+        </div>
+        <div id="simResult" class="demo-result">
+          <div class="demo-item-title">Example Listing (Target: 15% Profit)</div>
+          <div id="simMeta" class="demo-meta"></div>
+          <div id="simProfit" class="demo-profit"></div>
+          <div id="simFix" class="demo-fix"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="section reveal">
+      <div class="section-head">
+        <div class="section-label">How It Works</div>
+        <h2 class="section-title">Audit Your Store in Under 10 Seconds</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h3>Open eBay Seller Hub</h3>
+          <p>Go to your Active Listings or Manage Drafts page. MarginGuard automatically adds live profit pills right under each price.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h3>Enter or Upload Your Costs</h3>
+          <p>Type your Item Cost and My Shipping once—or bulk-upload a CSV. Your costs stay saved locally in Chrome.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h3>Fix Leaks & Accept Safe Offers</h3>
+          <p>Use the exact Suggested Price to hit your Target Profit, and check the Lowest Offer to Accept before replying to buyers.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section reveal">
+      <div class="section-head">
+        <div class="section-label">Features</div>
+        <h2 class="section-title">Built for Everyday eBay Sellers</h2>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Live Seller Hub Badges</h3>
+          <p>See your real net profit and profit percentage directly under every price on your Active Listings and Drafts tables.</p>
+        </div>
+        <div class="card">
+          <h3>Suggested Price & Lowest Offer</h3>
+          <p>Know the exact Suggested Price to reach your Target Profit, plus the Lowest Offer to Accept on Best Offer listings.</p>
+        </div>
+        <div class="card">
+          <h3>Accurate eBay Fee Math</h3>
+          <p>Accounts for eBay Store rates, Top Rated Seller discounts (-10%), International Buyer fees (+1.65%), ad rates, and per-order fees.</p>
+        </div>
+        <div class="card">
+          <h3>Saved Item & Shipping Costs</h3>
+          <p>Type your Item Cost and My Shipping once—or upload a CSV spreadsheet. MarginGuard remembers them every time you open eBay.</p>
+        </div>
+        <div class="card">
+          <h3>Problems Only Filter & Sorting</h3>
+          <p>Filter your store down to problem listings only and sort by Lowest Profit ($), Lowest Profit (%), or Highest Ad Cost.</p>
+        </div>
+        <div class="card">
+          <h3>One-Click eBay Rate Updates</h3>
+          <p>When eBay updates its fee structure, click Update Rates inside the extension to stay accurate without waiting for an update.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section reveal">
+      <div class="section-head centered">
+        <div class="section-label">Pricing</div>
+        <h2 class="section-title">Simple, Straightforward Plans</h2>
+      </div>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>Free</h3>
+          <div class="price-tag">$0 <span>/ forever</span></div>
+          <p class="price-desc">Great for trying MarginGuard on your store.</p>
+          <ul>
+            <li>Check up to 10 listings at a time</li>
+            <li>Live inline Seller Hub profit badges</li>
+            <li>eBay Store, Top Rated Seller & International Buyer settings</li>
+            <li>1 free Suggested Price / Lowest Offer preview</li>
+            <li>Auto-saved Item Cost & My Shipping</li>
+          </ul>
+          <a href="#" class="btn btn-secondary" style="width:100%;">Install Free Extension</a>
+        </div>
+
+        <div class="price-card pro">
+          <span class="popular-tag">Most Popular</span>
+          <h3>MarginGuard Pro</h3>
+          <div class="price-tag">$19 <span>/ month</span></div>
+          <p class="price-desc">Pays for itself on your first few fixed listings.</p>
+          <ul>
+            <li>Check unlimited listings</li>
+            <li>Full Suggested Price & Break-Even Price calculations</li>
+            <li>Lowest Offer to Accept calculator for Best Offers</li>
+            <li>Upload Costs (CSV) & Download Report (CSV)</li>
+            <li>Problems Only filter & profit/ad cost sorting</li>
+          </ul>
+          <a href="https://buy.polar.sh/polar_cl_zckNHhazKGSxABLypHq6oi6kBUcdmsvWOhDqB0nEisI" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%;">Upgrade to Pro</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section reveal">
+      <div class="section-head centered">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title">Common Questions</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Does MarginGuard work on Drafts before I publish?</summary>
+          <p>Yes. MarginGuard works on both Active Listings and Manage Drafts in eBay Seller Hub, so you can catch low-margin items before they ever go live.</p>
+        </details>
+        <details>
+          <summary>Is my eBay store data or Item Cost sent to a server?</summary>
+          <p>No. Everything runs locally inside your Chrome browser. Your listing titles, prices, and costs are saved strictly in Chrome's local storage and are never shared or sold.</p>
+        </details>
+        <details>
+          <summary>Why use this instead of a spreadsheet or AI chat?</summary>
+          <p>MarginGuard reads your live eBay page in one second, remembers your costs permanently, and applies exact eBay fee formulas (including Store tiers, Top Rated discounts, and ad rates) without copy-pasting or math errors.</p>
+        </details>
+        <details>
+          <summary>Can I cancel my Pro subscription anytime?</summary>
+          <p>Yes. You can manage or cancel your subscription in one click anytime through your Polar.sh customer portal.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="privacy" class="section reveal">
+      <div class="privacy">
+        <h3>Privacy Policy</h3>
+        <p>
+          MarginGuard runs locally inside your Chrome browser. Your eBay listing titles, prices, Item Costs, and shipping costs are stored strictly in your browser's local storage (<code>chrome.storage.local</code>) and are never sold, shared, or sent to external servers. Pro license key validation is handled securely through Polar.sh.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 MarginGuard. Not affiliated with eBay Inc.</span>
+      <a href="mailto:marginguardsupport@gmail.com">Contact Support</a>
+    </footer>
+  </div>
+
+  <script>
+    // Interactive Hero Calculator
+    function updateSim() {
+      const price = Math.max(0, parseFloat(document.getElementById("simPrice").value) || 0);
+      const cost = Math.max(0, parseFloat(document.getElementById("simCost").value) || 0);
+      const adPct = Math.max(0, parseFloat(document.getElementById("simAd").value) || 0);
+
+      const fvfRate = 0.136;
+      const adRate = adPct / 100;
+      const perOrder = price > 10 ? 0.40 : 0.30;
+      const totalVar = fvfRate + adRate;
+
+      const fees = price * totalVar + perOrder;
+      const profit = price - fees - cost;
+      const margin = price > 0 ? (profit / price) * 100 : 0;
+
+      const targetDenom = 1 - totalVar - 0.15;
+      const targetPrice = targetDenom > 0 ? (cost + perOrder) / targetDenom : null;
+      const breakEven = (1 - totalVar) > 0 ? (cost + perOrder) / (1 - totalVar) : null;
+
+      const isSafe = profit >= 0 && margin >= 15 && adPct < 10;
+      const resBox = document.getElementById("simResult");
+      const fixBox = document.getElementById("simFix");
+
+      resBox.classList.toggle("safe", isSafe);
+      fixBox.classList.toggle("safe", isSafe);
+
+      document.getElementById("simMeta").textContent =
+        `Listed: $${price.toFixed(2)} · eBay + Ad Fees: -$${fees.toFixed(2)}`;
+
+      const sign = profit < 0 ? "-" : "";
+      document.getElementById("simProfit").innerHTML =
+        `Your Profit: <strong class="${profit < 0 ? "neg" : "pos"}">${sign}$${Math.abs(profit).toFixed(2)} (${margin.toFixed(1)}%)</strong>`;
+
+      if (targetPrice && targetPrice > price + 0.01) {
+        fixBox.innerHTML = `<strong>Suggested Price: $${targetPrice.toFixed(2)}</strong> to reach 15% profit · Break-Even: $${breakEven.toFixed(2)}`;
+      } else if (targetPrice) {
+        fixBox.innerHTML = `<strong>Lowest Offer to Accept: $${targetPrice.toFixed(2)}</strong> · Break-Even: $${breakEven.toFixed(2)}`;
+      } else {
+        fixBox.innerHTML = `Ad rate is too high to reach a 15% profit target.`;
+      }
+    }
+
+    ["simPrice", "simCost", "simAd"].forEach((id) => {
+      document.getElementById(id).addEventListener("input", updateSim);
+    });
+    updateSim();
+
+    // Subtle Scroll Reveal
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
