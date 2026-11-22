@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MarginGuard — eBay Profit Leak & Fee Scanner</title>
+  <style>
+    :root {
+      --bg: #0b1120;
+      --surface: #131c31;
+      --surface-hover: #1a2540;
+      --border: rgba(148, 163, 184, 0.16);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --success: #10b981;
+      --danger: #ef4444;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: radial-gradient(circle at top right, #172554 0%, var(--bg) 45%);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Nav */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-badge {
+      background: linear-gradient(135deg, #3b82f6, #10b981);
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 0 64px;
+    }
+    .pill {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #6ee7b7;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: clamp(34px, 5vw, 52px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+      margin-bottom: 20px;
+    }
+    h1 span {
+      background: linear-gradient(135deg, #60a5fa, #34d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      max-width: 620px;
+      margin: 0 auto 32px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .cta-group {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 13px 26px;
+      border-radius: 9px;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.38);
+    }
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: var(--surface-hover); }
+
+    /* Features */
+    .section { padding: 64px 0; }
+    .section-title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 40px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .card-icon {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+    .card h3 {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+    .card p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* Pricing */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 24px;
+      max-width: 740px;
+      margin: 0 auto;
+    }
+    .price-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+    }
+    .price-card.pro {
+      border-color: rgba(59, 130, 246, 0.65);
+      box-shadow: 0 0 32px rgba(59, 130, 246, 0.16);
+      position: relative;
+    }
+    .price-tag {
+      font-size: 36px;
+      font-weight: 800;
+      margin: 12px 0 6px;
+    }
+    .price-tag span {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    .price-card ul {
+      list-style: none;
+      margin: 20px 0 28px;
+      flex: 1;
+    }
+    .price-card li {
+      font-size: 14px;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+      padding-left: 22px;
+      position: relative;
+    }
+    .price-card li::before {
+      content: "✓";
+      color: var(--success);
+      font-weight: 700;
+      position: absolute;
+      left: 0;
+    }
+
+    /* Privacy & Footer */
+    .privacy {
+      background: rgba(19, 28, 49, 0.55);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      margin-top: 24px;
+      font-size: 13.5px;
+      color: var(--muted);
+    }
+    .privacy h3 {
+      color: var(--text);
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+      margin-top: 56px;
+    }
+    footer a { color: #93c5fd; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <span class="logo-badge">🛡️</span>
+        MarginGuard
+      </div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#privacy">Privacy</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="pill">Chrome Extension for eBay Sellers</div>
+      <h1>Stop Bleeding Profit on <span>eBay Fees & Ads</span></h1>
+      <p>
+        MarginGuard audits your live eBay Seller Hub active listings and drafts in one click—flagging hidden fee stacks, ad bleed, and exact Fix Prices right inside your browser.
+      </p>
+      <div class="cta-group">
+        <a href="#pricing" class="btn btn-primary">Get MarginGuard Pro — $19/mo</a>
+        <a href="#features" class="btn btn-secondary">See How It Works</a>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <h2 class="section-title">Built for Active eBay Resellers</h2>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Live Inline Seller Hub Badges</h3>
+          <p>See instant green/red net profit and margin pills directly under every price on your Active Listings and Drafts tables.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <h3>Exact Fix Price & Best Offer Floor</h3>
+          <p>Know the exact price to raise underperforming listings to—and the lowest Best Offer you can safely accept without losing money.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3>True eBay Fee Stack Math</h3>
+          <p>Automatically accounts for Store vs. Standard FVF, Top Rated Seller (-10%), International (+1.65%), Promoted Listings, and per-order fees.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💾</div>
+          <h3>Auto-Saved COGS & Bulk CSV</h3>
+          <p>Enter your item and shipping costs once or bulk-import via CSV. MarginGuard remembers them locally every time you open Seller Hub.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔍</div>
+          <h3>Leaks-Only Filter & Sorting</h3>
+          <p>Cut through hundreds of listings in seconds. Filter to profit leaks only and sort by worst profit, lowest margin, or highest ad bleed.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">↻</div>
+          <h3>Auto-Updating Fee Formula</h3>
+          <p>When eBay adjusts fee percentages, update your formula in one click—no spreadsheets or manual recalculations required.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section">
+      <h2 class="section-title">Simple, Transparent Pricing</h2>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>Free</h3>
+          <div class="price-tag">$0 <span>/ forever</span></div>
+          <ul>
+            <li>Scan up to 10 listings per page</li>
+            <li>Live inline eBay Seller Hub badges</li>
+            <li>Store, Top Rated & International toggles</li>
+            <li>1 free Fix Price / Min Offer preview</li>
+            <li>Auto-saved local COGS & shipping</li>
+          </ul>
+          <a href="#" class="btn btn-secondary" style="text-align:center;">Install Free Extension</a>
+        </div>
+
+        <div class="price-card pro">
+          <h3>MarginGuard Pro</h3>
+          <div class="price-tag">$19 <span>/ month</span></div>
+          <ul>
+            <li>Unlimited listing scans</li>
+            <li>Full Fix Price & Break-Even recommendations</li>
+            <li>Best Offer Floor (Min Offer) calculator</li>
+            <li>Bulk COGS CSV Import & Audit CSV Export</li>
+            <li>Leaks-Only filter & profit/ad bleed sorting</li>
+          </ul>
+          <!-- Replace # with your Polar.sh checkout URL -->
+          <a href="https://buy.polar.sh/REPLACE_WITH_YOUR_LINK" class="btn btn-primary" style="text-align:center;">Upgrade to Pro</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="privacy" class="section">
+      <div class="privacy">
+        <h3>Privacy Policy</h3>
+        <p>
+          MarginGuard runs 100% locally inside your Chrome browser. Your eBay listing titles, prices, COGS, and shipping costs are stored strictly in your browser's local storage (<code>chrome.storage.local</code>) and are never sold, shared, or transmitted to external servers. License key validation is handled securely via Polar.sh.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 MarginGuard. Not affiliated with eBay Inc. • Support: <a href="mailto:support@marginguard.app">Contact Support</a>
+    </footer>
+  </div>
+</body>
+</html>

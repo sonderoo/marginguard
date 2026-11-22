@@ -1,0 +1,10 @@
+{
+  "version": "2026.11",
+  "updatedAt": "Nov 2026",
+  "storeFvf": 0.127,
+  "standardFvf": 0.136,
+  "topRatedDiscount": 0.10,
+  "intlRate": 0.0165,
+  "perOrderUnder10": 0.30,
+  "perOrderOver10": 0.40
+}
