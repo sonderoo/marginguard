@@ -4,23 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MarginGuard — eBay Profit & Fee Checker</title>
+  <meta name="description" content="See your real eBay profit inside Seller Hub before fees and ad rates eat it. Calculate exact Suggested Prices and Lowest Offers to Accept." />
   <link rel="icon" type="image/png" sizes="128x128" href="./logo128.png?v=2" />
   <link rel="shortcut icon" type="image/png" href="./logo128.png?v=2" />
   <link rel="apple-touch-icon" href="./logo128.png?v=2" />
   <style>
     :root {
-      --bg: #0c0d10;
-      --surface: #14161b;
-      --surface-hover: #1b1e25;
-      --input-bg: #0a0b0d;
-      --border: #242730;
-      --border-strong: #343946;
+      --bg: #090a0d;
+      --surface: #12141a;
+      --surface-hover: #181b23;
+      --input-bg: #0a0b0e;
+      --border: #20232d;
+      --border-strong: #2f3442;
       --text: #f3f4f6;
       --text-secondary: #c5c9d1;
       --muted: #8b919d;
       --accent: #f3f4f6;
-      --accent-text: #0c0d10;
+      --accent-text: #090a0d;
       --green: #22c55e;
+      --green-text: #4ade80;
       --green-bg: rgba(34, 197, 94, 0.1);
       --green-border: rgba(34, 197, 94, 0.28);
       --amber: #f59e0b;
@@ -37,8 +39,11 @@
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--bg);
-      background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-      background-size: 28px 28px;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(34, 197, 94, 0.09), transparent 65%),
+        radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 100% 100%, 28px 28px;
+      background-repeat: no-repeat, repeat;
       color: var(--text);
       line-height: 1.6;
       font-variant-numeric: tabular-nums;
@@ -47,7 +52,7 @@
     }
 
     .container {
-      max-width: 1060px;
+      max-width: 1080px;
       margin: 0 auto;
       padding: 0 24px;
     }
@@ -57,8 +62,8 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(12, 13, 16, 0.84);
-      backdrop-filter: blur(12px);
+      background: rgba(9, 10, 13, 0.82);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
     nav {
@@ -118,22 +123,23 @@
       color: var(--accent-text) !important;
       font-weight: 600 !important;
       font-size: 13px !important;
+      transition: background 0.15s ease, transform 0.15s ease;
     }
-    .nav-cta:hover { background: #e2e5e9; }
-    @media (max-width: 680px) {
+    .nav-cta:hover { background: #e2e5e9; transform: translateY(-1px); }
+    @media (max-width: 720px) {
       .nav-links a:not(.nav-cta), .nav-links button.nav-link-btn { display: none; }
     }
 
     /* Hero 2-Column Layout */
     .hero {
-      padding: 64px 0 76px;
+      padding: 68px 0 64px;
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
-      gap: 44px;
+      gap: 48px;
       align-items: center;
     }
     @media (max-width: 880px) {
-      .hero { grid-template-columns: 1fr; padding: 44px 0 56px; gap: 36px; }
+      .hero { grid-template-columns: 1fr; padding: 44px 0 48px; gap: 36px; }
     }
     .tag {
       display: inline-flex;
@@ -141,10 +147,10 @@
       gap: 7px;
       font-size: 12px;
       font-weight: 600;
-      color: #4ade80;
+      color: var(--green-text);
       background: var(--green-bg);
       border: 1px solid var(--green-border);
-      padding: 4px 11px;
+      padding: 4px 12px;
       border-radius: 99px;
       margin-bottom: 18px;
     }
@@ -161,23 +167,26 @@
     }
 
     h1 {
-      font-size: clamp(34px, 4.2vw, 48px);
+      font-size: clamp(34px, 4.3vw, 50px);
       font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.12;
-      margin-bottom: 16px;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      margin-bottom: 18px;
+      background: linear-gradient(180deg, #ffffff 30%, #a5adba 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .hero-sub {
       color: var(--text-secondary);
       font-size: 16px;
-      margin-bottom: 26px;
+      margin-bottom: 28px;
       max-width: 500px;
     }
     .cta-group {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
     .btn {
       display: inline-flex;
@@ -192,13 +201,14 @@
       cursor: pointer;
       border: 1px solid transparent;
       font-family: inherit;
-      transition: transform 0.16s ease, background 0.15s ease, border-color 0.15s ease;
+      transition: transform 0.16s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
     .btn:hover { transform: translateY(-1px); }
     .btn:active { transform: translateY(0); }
     .btn-primary {
       background: var(--accent);
       color: var(--accent-text);
+      box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
     }
     .btn-primary:hover { background: #e2e5e9; }
     .btn-secondary {
@@ -222,9 +232,11 @@
     .demo-shell {
       background: var(--surface);
       border: 1px solid var(--border-strong);
-      border-radius: 12px;
-      padding: 18px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 28px 70px rgba(0, 0, 0, 0.65);
       transition: border-color 0.25s ease;
     }
     .demo-shell:hover { border-color: #474e5e; }
@@ -232,13 +244,13 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 11px;
-      margin-bottom: 12px;
+      padding-bottom: 12px;
+      margin-bottom: 13px;
       border-bottom: 1px solid var(--border);
       font-size: 12px;
       color: var(--muted);
     }
-    .demo-header strong { color: var(--text); font-size: 13px; }
+    .demo-header strong { color: var(--text); font-size: 13.5px; }
     .preset-row {
       display: flex;
       gap: 6px;
@@ -246,8 +258,8 @@
       margin-bottom: 12px;
     }
     .preset-btn {
-      padding: 4px 9px;
-      border-radius: 5px;
+      padding: 5px 10px;
+      border-radius: 6px;
       border: 1px solid var(--border-strong);
       background: var(--input-bg);
       color: var(--text-secondary);
@@ -255,7 +267,7 @@
       font-weight: 500;
       cursor: pointer;
       font-family: inherit;
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+      transition: all 0.15s ease;
     }
     .preset-btn:hover, .preset-btn.active {
       background: var(--surface-hover);
@@ -276,7 +288,7 @@
     }
     .demo-field input {
       width: 100%;
-      padding: 7px 8px;
+      padding: 8px 9px;
       border-radius: 6px;
       border: 1px solid var(--border-strong);
       background: var(--input-bg);
@@ -316,11 +328,11 @@
     }
 
     .demo-result {
-      background: #0f1115;
+      background: #0b0c10;
       border: 1px solid var(--border);
       border-left: 3px solid var(--red);
       border-radius: 8px;
-      padding: 13px;
+      padding: 14px;
       transition: border-left-color 0.2s ease;
     }
     .demo-result.safe { border-left-color: var(--green); }
@@ -328,12 +340,10 @@
     .demo-meta { font-size: 12px; color: var(--muted); }
     .demo-profit { font-size: 14.5px; margin-top: 5px; }
     .demo-profit strong.neg { color: #f87171; }
-    .demo-profit strong.pos { color: #4ade80; }
+    .demo-profit strong.pos { color: var(--green-text); }
 
     /* Visual Breakdown Bar */
-    .bar-wrap {
-      margin-top: 10px;
-    }
+    .bar-wrap { margin-top: 10px; }
     .bar-track {
       height: 7px;
       border-radius: 99px;
@@ -361,7 +371,7 @@
 
     .demo-fix {
       margin-top: 10px;
-      padding: 8px 10px;
+      padding: 9px 11px;
       border-radius: 6px;
       font-size: 12px;
       background: var(--amber-bg);
@@ -374,50 +384,85 @@
       color: #bbf7d0;
     }
 
+    /* Trust & Security Bar */
+    .trust-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      padding: 28px 0 56px;
+    }
+    @media (max-width: 820px) { .trust-bar { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .trust-bar { grid-template-columns: 1fr; } }
+    .trust-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+    .trust-item strong {
+      display: block;
+      font-size: 13.5px;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .trust-item span {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.45;
+      display: block;
+    }
+
     /* Sections */
     .section {
-      padding: 68px 0;
+      padding: 72px 0;
       border-top: 1px solid var(--border);
     }
-    .section-head { margin-bottom: 34px; }
+    .section-head { margin-bottom: 36px; }
     .section-head.centered { text-align: center; }
     .section-label {
       font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
+      letter-spacing: 0.09em;
+      color: var(--green-text);
       margin-bottom: 8px;
     }
     .section-title {
-      font-size: clamp(24px, 3vw, 30px);
+      font-size: clamp(24px, 3vw, 32px);
       font-weight: 700;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.025em;
     }
+    .section-sub {
+      color: var(--muted);
+      font-size: 14.5px;
+      margin-top: 8px;
+      max-width: 580px;
+    }
+    .section-head.centered .section-sub { margin: 8px auto 0; }
 
     /* Before / After Comparison */
     .compare-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
+      gap: 20px;
     }
-    @media (max-width: 720px) {
-      .compare-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 720px) { .compare-grid { grid-template-columns: 1fr; } }
     .compare-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 24px;
+      border-radius: 12px;
+      padding: 26px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
     }
     .compare-card.bad { border-top: 3px solid var(--red); }
     .compare-card.good { border-top: 3px solid var(--green); }
-    .compare-card h3 { font-size: 16px; margin-bottom: 12px; }
-    .compare-card ul { list-style: none; display: grid; gap: 9px; }
+    .compare-card h3 { font-size: 16.5px; margin-bottom: 14px; }
+    .compare-card ul { list-style: none; display: grid; gap: 10px; }
     .compare-card li {
       font-size: 13.5px;
       color: var(--text-secondary);
-      padding-left: 20px;
+      padding-left: 22px;
       position: relative;
     }
     .compare-card.bad li::before { content: "✕"; color: var(--red); position: absolute; left: 0; font-weight: 700; }
@@ -432,21 +477,23 @@
     .step-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 22px;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
     }
     .step-num {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 26px;
-      height: 26px;
-      border-radius: 6px;
-      background: #1f222a;
-      border: 1px solid var(--border-strong);
-      font-size: 12px;
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+      color: var(--green-text);
+      font-size: 12.5px;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
     .step-card h3 { font-size: 15.5px; margin-bottom: 6px; }
     .step-card p { font-size: 13.5px; color: var(--muted); }
@@ -454,14 +501,15 @@
     /* Features Grid */
     .grid-3 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
       gap: 16px;
     }
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 24px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
       transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
     .card:hover {
@@ -474,12 +522,13 @@
 
     /* ROI / Leak Estimator Box */
     .roi-box {
-      max-width: 740px;
-      margin: 0 auto 36px;
+      max-width: 760px;
+      margin: 0 auto 38px;
       background: var(--surface);
       border: 1px solid var(--border-strong);
-      border-radius: 12px;
-      padding: 24px;
+      border-radius: 14px;
+      padding: 26px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
     }
     .roi-top {
       display: flex;
@@ -487,22 +536,22 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
-    .roi-top h3 { font-size: 16px; }
+    .roi-top h3 { font-size: 16.5px; }
     .roi-badge {
       font-size: 12px;
       font-weight: 600;
-      color: #4ade80;
+      color: var(--green-text);
       background: var(--green-bg);
       border: 1px solid var(--green-border);
-      padding: 3px 10px;
+      padding: 3px 11px;
       border-radius: 99px;
     }
     .roi-sliders {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 22px;
       margin-bottom: 18px;
     }
     @media (max-width: 600px) { .roi-sliders { grid-template-columns: 1fr; } }
@@ -511,7 +560,7 @@
       justify-content: space-between;
       font-size: 12.5px;
       color: var(--text-secondary);
-      margin-bottom: 6px;
+      margin-bottom: 7px;
     }
     .roi-control input[type="range"] {
       width: 100%;
@@ -519,10 +568,10 @@
       cursor: pointer;
     }
     .roi-output {
-      background: #0f1115;
+      background: #0b0c10;
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px 16px;
+      border-radius: 10px;
+      padding: 15px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -531,9 +580,9 @@
       font-size: 13.5px;
     }
     .roi-number {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
-      color: #4ade80;
+      color: var(--green-text);
     }
 
     /* Centered 2-Option Pricing */
@@ -541,7 +590,7 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
-      max-width: 740px;
+      max-width: 760px;
       margin: 0 auto;
     }
     @media (max-width: 700px) {
@@ -550,18 +599,21 @@
     .price-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 30px;
       display: flex;
       flex-direction: column;
       position: relative;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
       transition: transform 0.2s ease, border-color 0.2s ease;
     }
     .price-card:hover { transform: translateY(-2px); }
     .price-card.pro {
       border-color: var(--border-strong);
       border-top: 3px solid var(--green);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 20px 50px rgba(0, 0, 0, 0.5);
     }
     .popular-tag {
       position: absolute;
@@ -569,14 +621,14 @@
       right: 16px;
       font-size: 11px;
       font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 4px;
+      padding: 3px 9px;
+      border-radius: 5px;
       background: var(--green-bg);
       border: 1px solid var(--green-border);
-      color: #4ade80;
+      color: var(--green-text);
     }
-    .price-card h3 { font-size: 17px; font-weight: 600; }
-    .price-tag { font-size: 36px; font-weight: 700; margin: 10px 0 4px; }
+    .price-card h3 { font-size: 17.5px; font-weight: 600; }
+    .price-tag { font-size: 38px; font-weight: 700; margin: 10px 0 4px; letter-spacing: -0.02em; }
     .price-tag span { font-size: 14px; font-weight: 500; color: var(--muted); }
     .price-desc { font-size: 13px; color: var(--muted); }
     .price-card ul { list-style: none; margin: 22px 0 28px; flex: 1; }
@@ -584,7 +636,7 @@
       font-size: 14px;
       color: var(--text-secondary);
       margin-bottom: 10px;
-      padding-left: 20px;
+      padding-left: 22px;
       position: relative;
     }
     .price-card li::before {
@@ -597,7 +649,7 @@
 
     /* FAQ */
     .faq-list {
-      max-width: 740px;
+      max-width: 760px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -606,8 +658,14 @@
     details {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px 18px;
+      border-radius: 10px;
+      padding: 17px 20px;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+    details:hover { border-color: var(--border-strong); }
+    details[open] {
+      border-color: var(--border-strong);
+      background: var(--surface-hover);
     }
     summary {
       font-weight: 600;
@@ -617,27 +675,65 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 14px;
+      color: var(--text);
     }
-    summary::after { content: "+"; color: var(--muted); font-size: 18px; font-weight: 400; }
-    details[open] summary::after { content: "−"; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--muted); font-size: 19px; font-weight: 400; flex-shrink: 0; }
+    details[open] summary::after { content: "−"; color: var(--green-text); }
     details p {
-      margin-top: 10px;
+      margin-top: 12px;
       font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+    details code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 2px 5px;
+      border-radius: 4px;
+      color: var(--text);
+    }
+
+    /* Closing CTA Banner */
+    .cta-banner {
+      background: linear-gradient(180deg, #161922 0%, #101218 100%);
+      border: 1px solid var(--border-strong);
+      border-radius: 14px;
+      padding: 40px 28px;
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+    .cta-banner h2 {
+      font-size: clamp(22px, 3vw, 28px);
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .cta-banner p {
       color: var(--muted);
-      line-height: 1.6;
+      font-size: 14.5px;
+      max-width: 500px;
+      margin: 0 auto 24px;
+    }
+    .cta-banner .cta-group {
+      justify-content: center;
+      margin-bottom: 0;
     }
 
     /* Privacy */
     .privacy {
-      max-width: 740px;
+      max-width: 760px;
       margin: 0 auto;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 24px;
       font-size: 13.5px;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.65;
     }
     .privacy h3 { color: var(--text); margin-bottom: 8px; font-size: 15.5px; }
     .privacy code { color: var(--text-secondary); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; }
@@ -673,8 +769,8 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.72);
-      backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.74);
+      backdrop-filter: blur(5px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -687,9 +783,9 @@
       max-width: 440px;
       background: var(--surface);
       border: 1px solid var(--border-strong);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 24px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.7);
     }
     .modal-head {
       display: flex;
@@ -750,6 +846,7 @@
       border: 1px solid var(--border-strong);
       background: var(--surface-hover);
       color: var(--text);
+      transition: border-color 0.15s ease;
     }
     .modal-actions a:hover { border-color: #6b7280; }
 
@@ -809,7 +906,7 @@
           <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
         </div>
         <div class="trust-strip">
-          <span>Works on Active Listings & Drafts</span>
+          <span>No eBay Login Required</span>
           <span>100% Local & Private</span>
           <span>Cancel Anytime</span>
         </div>
@@ -819,7 +916,7 @@
       <div class="demo-shell">
         <div class="demo-header">
           <strong>Live eBay Profit Simulator</strong>
-          <span style="font-size:11px; color:var(--green);">Real-Time Math</span>
+          <span style="font-size:11px; color:var(--green-text); font-weight:600;">Real-Time Math</span>
         </div>
 
         <div class="preset-row">
@@ -872,10 +969,31 @@
       </div>
     </section>
 
+    <!-- Verifiable Trust & Security Bar -->
+    <div class="trust-bar reveal">
+      <div class="trust-item">
+        <strong>Read-Only & Account Safe</strong>
+        <span>Never asks for your eBay password, API keys, or edit access.</span>
+      </div>
+      <div class="trust-item">
+        <strong>100% Local Privacy</strong>
+        <span>Your products and costs stay in Chrome—never sent to our servers.</span>
+      </div>
+      <div class="trust-item">
+        <strong>2026 eBay Fee Stack</strong>
+        <span>Includes Store tiers, TRS (-10%), Intl (+1.65%), and Promoted Ads.</span>
+      </div>
+      <div class="trust-item">
+        <strong>1-Click Cancellation</strong>
+        <span>Secure billing via Polar.sh with instant self-serve cancellation.</span>
+      </div>
+    </div>
+
     <section class="section reveal">
       <div class="section-head centered">
         <div class="section-label">Why Sellers Switch</div>
         <h2 class="section-title">Stop Guessing Your Margins</h2>
+        <p class="section-sub">Most sellers don't realize how much Promoted Listings and fee tiers take until after the item sells.</p>
       </div>
       <div class="compare-grid">
         <div class="compare-card bad">
@@ -960,13 +1078,14 @@
       <div class="section-head centered">
         <div class="section-label">Pricing</div>
         <h2 class="section-title">Simple, Straightforward Plans</h2>
+        <p class="section-sub">Start free forever. Upgrade to Pro when you're ready to audit your entire store in seconds.</p>
       </div>
 
       <!-- Interactive ROI Estimator -->
       <div class="roi-box">
         <div class="roi-top">
           <h3>How Much Are Hidden Fee Leaks Costing You?</h3>
-          <span id="roiPayback" class="roi-badge">Pays for itself in 4 sales</span>
+          <span id="roiPayback" class="roi-badge">Pays for itself in 5 fixed sales</span>
         </div>
         <div class="roi-sliders">
           <div class="roi-control">
@@ -1022,25 +1141,76 @@
     <section id="faq" class="section reveal">
       <div class="section-head centered">
         <div class="section-label">FAQ</div>
-        <h2 class="section-title">Common Questions</h2>
+        <h2 class="section-title">Everything You Need to Know</h2>
+        <p class="section-sub">Straight answers about account safety, fee accuracy, privacy, and billing.</p>
       </div>
       <div class="faq-list">
-        <details>
-          <summary>Does MarginGuard work on Drafts before I publish?</summary>
-          <p>Yes. MarginGuard works on both Active Listings and Manage Drafts in eBay Seller Hub, so you can catch low-margin items before they ever go live.</p>
+        <details open>
+          <summary>Is MarginGuard safe for my eBay account? Does it need my login?</summary>
+          <p>
+            100% safe. MarginGuard never asks for your eBay password, API keys, or account permissions. It is a read-only Chrome extension that simply reads the prices and ad rates already visible on your screen in Seller Hub—just like a built-in calculator. It never modifies your listings or automates actions on your account.
+          </p>
         </details>
+
         <details>
-          <summary>Is my eBay store data or Item Cost sent to a server?</summary>
-          <p>No. Everything runs locally inside your Chrome browser. Your listing titles, prices, and costs are saved strictly in Chrome's local storage and are never shared or sold.</p>
+          <summary>How accurate is the fee math—and what happens when eBay changes fees?</summary>
+          <p>
+            MarginGuard calculates the full eBay fee stack: Standard (13.6%) or eBay Store (12.7%) Final Value Fees, Top Rated Seller discounts (-10%), International Buyer fees (+1.65%), Promoted Listings ad rates, and per-order fees ($0.30 under $10 / $0.40 over $10). Whenever eBay updates its fee schedule, just click <strong>Update Rates</strong> inside the extension to pull the latest rates instantly.
+          </p>
         </details>
+
         <details>
-          <summary>Why use this instead of a spreadsheet or AI chat?</summary>
-          <p>MarginGuard reads your live eBay page in one second, remembers your costs permanently, and applies exact eBay fee formulas (including Store tiers, Top Rated discounts, and ad rates) without copy-pasting or math errors.</p>
+          <summary>Does it work on Drafts before I publish, or only Active Listings?</summary>
+          <p>
+            Both. MarginGuard runs on <strong>Active Listings</strong> and <strong>Manage Drafts</strong> inside eBay Seller Hub. You can audit existing inventory to stop ongoing profit leaks, and check new drafts before they go live so you never list an underpriced item again.
+          </p>
         </details>
+
         <details>
-          <summary>Can I cancel my Pro subscription anytime?</summary>
-          <p>Yes. You can manage or cancel your subscription in one click anytime through your Polar.sh customer portal.</p>
+          <summary>How does "Lowest Offer to Accept" help with Best Offers?</summary>
+          <p>
+            When a buyer sends a Best Offer, it's easy to accidentally accept a price that leaves you with $1 in profit after Promoted Listing ads and shipping. MarginGuard calculates your exact floor price in advance—showing you the lowest dollar amount (and max % discount) you can accept while still hitting your Target Profit.
+          </p>
         </details>
+
+        <details>
+          <summary>Are my winning products, prices, or Item Costs sent to your servers?</summary>
+          <p>
+            Never. We don't even have a database for your store data. Every listing title, price, Item Cost, and shipping cost stays 100% local inside your own Chrome browser (<code>chrome.storage.local</code>). The only external request MarginGuard makes is validating your optional Pro license key through Polar.sh.
+          </p>
+        </details>
+
+        <details>
+          <summary>What if I have hundreds of listings? Do I have to type every cost manually?</summary>
+          <p>
+            No. You can type Item Cost and My Shipping directly on any card (and MarginGuard remembers them permanently), or use <strong>Upload Costs (CSV)</strong> in Pro to import your entire inventory's costs from a spreadsheet in two seconds.
+          </p>
+        </details>
+
+        <details>
+          <summary>Can I use MarginGuard Pro on both my laptop and desktop?</summary>
+          <p>
+            Yes. Once you activate your Pro license key, it syncs automatically across your own Chrome devices signed into the same Google profile—no need to buy a second subscription.
+          </p>
+        </details>
+
+        <details>
+          <summary>Can I try it for free first, and how do I cancel Pro?</summary>
+          <p>
+            Yes—the Free plan works forever on up to 10 listings at a time, including live inline Seller Hub badges and 1 free Suggested Price / Lowest Offer preview. If you upgrade to Pro ($19/month), you can manage or cancel your subscription in one click anytime directly from the extension or the <a href="https://polar.sh/marginguard/portal" target="_blank" rel="noopener noreferrer" style="color:var(--text); text-decoration:underline;">Polar Customer Portal</a>—no emails or hoops required.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="cta-banner">
+        <h2>Stop Letting Hidden eBay Fees Drain Your Store</h2>
+        <p>Install MarginGuard in seconds, audit your Seller Hub listings locally, and protect your profit on every sale.</p>
+        <div class="cta-group">
+          <a href="https://buy.polar.sh/polar_cl_zckNHhazKGSxABLypHq6oi6kBUcdmsvWOhDqB0nEisI" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Upgrade to Pro — $19/mo</a>
+          <a href="#pricing" class="btn btn-secondary">Start with Free Plan</a>
+        </div>
       </div>
     </section>
 
